@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>写博客</title>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/editormd/css/editormd.css"/>
+</head>
+<body>
+
+
+<div id="layout">
+    <header>
+        <h1>写博客</h1>
+    </header>
+
+    <form method="post" action="/article/save" th:object="${article}">
+
+        <!--插入题目-->
+        <div class="title">
+            <label class="label" for="article-title">标题</label>
+            <input id="article-title" class="article-title" type="text" th:field="*{title}" />
+        </div>
+
+        <hr/>
+        <!--markdown editor-->
+        <div id="my-editormd">
+            <textarea style="display:none;" th:field="*{content}"></textarea>
+        </div>
+
+        <div style="width:90%;margin: 10px auto;">
+            <input type="submit" value="提交" style="padding: 5px;"/>
+        </div>
+
+    </form>
+
+</div>
+
+
+<script src="/jquery.min.js"></script>
+<script src="/editormd/editormd.min.js"></script>
+<script type="text/javascript">
+    var testEditor;
+
+    $(function () {
+        testEditor = editormd("my-editormd", {
+            width: "90%",
+            height: 640,
+            syncScrolling: "single",
+            path: "/editormd/lib/",
+            tex: true,
+            imageUpload: true,
+            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL: "article/",
+
+        });
+    });
+</script>
+
+
+</body>
+</html>

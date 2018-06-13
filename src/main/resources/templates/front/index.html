@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Edward blog</title>
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+</head>
+
+<body>
+<header>
+    <h1>Edward home page</h1>
+    <hr/>
+</header>
+<main>
+    <article>
+        <div th:if="${not #lists.isEmpty(articles)}">
+            <div class="article" th:each="article:${articles}">
+                <a class="article-title-link" th:text="${article.getTitle()}"
+                   th:href="@{'/article/details/'+${article.getId()}}"
+                ></a>
+                <p class="summery" th:text="${article.getSummary()}"></p>
+            </div>
+        </div>
+    </article>
+
+    <aside>
+
+        <div th:if="${not #lists.isEmpty(categories)}">
+            <h2>文章分类</h2>
+            <ul>
+                <div class="category" th:each="category:${categories}">
+                    <li th:text="${category.getDisplayName()}"> </li>
+                </div>
+            </ul>
+        </div>
+
+    </aside>
+</main>
+
+
+
+<footer>
+    <hr/>
+    <p class="footer">cu shanghai Edward</p>
+</footer>
+
+</body>
+</html>

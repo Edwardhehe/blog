@@ -1,0 +1,19 @@
+body{
+    font-family: Microsoft JhengHei	;
+    margin: 0 auto;
+    background-color: azure;
+}
+
+.title{
+    margin: 0 auto;
+    text-align: center;
+}
+
+header{
+    text-align: center;
+}
+.label{
+    text-align: left;
+    font-size: 20px;
+    font-family: "微软雅黑", Arial;
+}

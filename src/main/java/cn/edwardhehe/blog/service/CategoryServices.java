@@ -12,7 +12,7 @@ public class CategoryServices {
     @Autowired
     private CategoryDao categoryDao;
 
-    public List<Category> list(String id){
+    public List<Category> list(){
         return categoryDao.findAll();
     }
 
