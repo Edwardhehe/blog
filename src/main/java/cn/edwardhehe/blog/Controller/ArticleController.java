@@ -44,16 +44,7 @@ public class ArticleController {
     /*
     通过文章类型选取显示页面
      */
-    @RequestMapping("/categories/{categoryId}")
-    public String getArticlesByCategory(Model model,
-                                        @PathVariable(name = "categoryId") String categoryId){
-        List<Article> articles = articleServices.getByCategory(categoryId);
-        List<Category> categories=categoryServices.list();
-        model.addAttribute("articles", articles);
-        model.addAttribute("categories", categories);
 
-        return "front/index";
-    }
 
     /*
     写markDown文章界面

@@ -14,10 +14,23 @@
 <main>
     <article th:if="${not #lists.isEmpty(articles)}">
         <div class="article" th:each="article:${articles}">
-            <a class="article-title-link" th:text="${article.getTitle()}"
-               th:href="@{'/article/details/'+${article.getId()}}"
-            ></a>
-            <p class="summery" th:text="${article.getSummary()}"></p>
+
+            <div class="article-info">
+                <div class="article-title">
+                    <a class="article-title-link" th:text="${article.getTitle()}"
+                       th:href="@{'/article/details/'+${article.getId()}}"/>
+                </div>
+
+                <div class="article-date">
+                    <p th:text="@{'创建时间:'+${article.getDate()}}"/>
+                </div>
+            </div>
+
+
+            <div class="article-summery">
+                <p class="summery" th:text="${article.getSummary()}"/>
+            </div>
+
         </div>
     </article>
 
@@ -25,7 +38,7 @@
         <h2>文章分类</h2>
         <ul>
             <li id="category" th:each="category:${categories}">
-                <a id="category-link" th:href="@{'/article/categories/'+${category.getId()}}"
+                <a id="category-link" th:href="@{'/categories/'+${category.getId()}}"
                    th:text="${category.getDisplayName()}"></a>
 
             </li>
