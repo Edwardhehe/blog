@@ -21,11 +21,12 @@
         </div>
     </article>
 
-    <aside th:if="${not #lists.isEmpty(categories)}">
+    <aside>
         <h2>文章分类</h2>
         <ul>
-            <li id="category" th:each="category:${categories}"
-                th:text="${category.getDisplayName()}">
+            <li id="category" th:each="category:${categories}">
+                <a id="category-link" th:href="@{'/article/categories/'+${category.getId()}}"
+                   th:text="${category.getDisplayName()}"></a>
 
             </li>
         </ul>

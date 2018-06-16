@@ -14,9 +14,11 @@ import java.util.List;
 @Repository
 public interface ArticleDao extends JpaRepository<Article, String>{
 
-    public List<Article> findAllByCategory_Name(String name);
+    List<Article> findAllByCategory_Name(String name);
 
     @Query("from Article where title like %:title%")
-    public List<Article> findByTitleLike(@Param("title") String title);
+    List<Article> findByTitleLike(@Param("title") String title);
 
+    @Query("from Article where category = category")
+    List<Article> findByCategory(@Param("categoryId")String categoryId);
 }

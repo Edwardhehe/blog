@@ -20,6 +20,7 @@ public class CategoryServices {
         return categoryDao.getOne(id);
     }
 
+
     public Category fingdByName(String name){
         return categoryDao.findByName(name);
     }

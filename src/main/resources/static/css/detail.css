@@ -7,16 +7,16 @@ html{
 }
 
 header h1{
-    font-family: Microsoft JhengHei	;
     size: 20px;
 }
-header p{
-    font-family: Microsoft JhengHei	;
-    size: 12px;
+
+.article-category{
+    size: 1rem;
     text-align: center;
     border: bisque;
-    width: 50px;
     background-color: bisque;
+    width:fit-content;
+    width:-moz-fit-content;
 }
 article{
     width: 100%;

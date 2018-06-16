@@ -15,7 +15,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/article")
-public class OverController {
+public class ArticleController {
 
     @Autowired
     ArticleServices articleServices;
@@ -41,6 +41,23 @@ public class OverController {
         return "front/articleDetails";
     }
 
+    /*
+    通过文章类型选取显示页面
+     */
+    @RequestMapping("/categories/{categoryId}")
+    public String getArticlesByCategory(Model model,
+                                        @PathVariable(name = "categoryId") String categoryId){
+        List<Article> articles = articleServices.getByCategory(categoryId);
+        List<Category> categories=categoryServices.list();
+        model.addAttribute("articles", articles);
+        model.addAttribute("categories", categories);
+
+        return "front/index";
+    }
+
+    /*
+    写markDown文章界面
+     */
     @RequestMapping("/write")
     public String writeArticle(Model model){
         model.addAttribute("article", new Article());
@@ -60,5 +77,4 @@ public class OverController {
         articleServices.save(article);
         return "front/write";
     }
-
 }
