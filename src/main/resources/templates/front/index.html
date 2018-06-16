@@ -8,40 +8,34 @@
 
 <body>
 <header>
-    <h1>Edward home page</h1>
+    <h1>Edwardhehe home page</h1>
     <hr/>
 </header>
 <main>
-    <article>
-        <div th:if="${not #lists.isEmpty(articles)}">
-            <div class="article" th:each="article:${articles}">
-                <a class="article-title-link" th:text="${article.getTitle()}"
-                   th:href="@{'/article/details/'+${article.getId()}}"
-                ></a>
-                <p class="summery" th:text="${article.getSummary()}"></p>
-            </div>
+    <article th:if="${not #lists.isEmpty(articles)}">
+        <div class="article" th:each="article:${articles}">
+            <a class="article-title-link" th:text="${article.getTitle()}"
+               th:href="@{'/article/details/'+${article.getId()}}"
+            ></a>
+            <p class="summery" th:text="${article.getSummary()}"></p>
         </div>
     </article>
 
-    <aside>
+    <aside th:if="${not #lists.isEmpty(categories)}">
+        <h2>文章分类</h2>
+        <ul>
+            <li id="category" th:each="category:${categories}"
+                th:text="${category.getDisplayName()}">
 
-        <div th:if="${not #lists.isEmpty(categories)}">
-            <h2>文章分类</h2>
-            <ul>
-                <div class="category" th:each="category:${categories}">
-                    <li th:text="${category.getDisplayName()}"> </li>
-                </div>
-            </ul>
-        </div>
-
+            </li>
+        </ul>
     </aside>
 </main>
 
 
-
 <footer>
     <hr/>
-    <p class="footer">cu shanghai Edward</p>
+    <p class="footer">&copy;Edwardhehe since 2018</p>
 </footer>
 
 </body>

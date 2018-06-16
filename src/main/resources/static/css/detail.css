@@ -1,9 +1,9 @@
-body{
-
-    background-color: azure;
-    width: 1000px;
+html{
+    size:12px;
+    font-family: Microsoft JhengHei	;
+    max-width: 1000px;
     margin: 0 auto;
-    text-align: center;
+    background-color: azure;
 }
 
 header h1{

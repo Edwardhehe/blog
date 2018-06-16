@@ -1,28 +1,16 @@
-body{
+html{
+    size:12px;
     font-family: Microsoft JhengHei	;
     max-width: 1000px;
     margin: 0 auto;
     background-color: azure;
 }
-main{
-
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-ul{
-    font-size: 12px;
-}
 
 header {
-
     width: auto;
     float: top;
-    background-color: aliceblue;
 }
-header h1{
-    size: 20px;
-}
+
 
 article{
     width: 80%;
@@ -32,14 +20,51 @@ article{
 aside{
     width: 20%;
     float: left;
+    text-align: left;
 }
 
 footer{
     width: 100%;
+    font-size: 0.8rem;
     float: right;
 }
 
+header h1{
+    size: 3rem;
+    text-shadow:  2px 2px 5px;
+    text-align: left;
+}
+
 footer p{
-    size: 13px;
+    size: 1rem;
     text-align: right;
 }
+
+
+a{
+    text-decoration: none;
+}
+
+aside ul{
+    line-height: 1.5rem;
+    margin-left: 0px;
+    padding-left: 0px;
+    list-style-type: none;
+
+}
+
+.article-title-link{
+    size: 2rem;
+}
+
+.article-title-link:hover{
+    text-decoration: none;
+    color: #ff7518;
+}
+
+.summery{
+    size: 1rem;
+    font-family: 楷体;
+}
+
+
