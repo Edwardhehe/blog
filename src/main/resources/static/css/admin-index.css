@@ -1,0 +1,28 @@
+html{
+    size:12px;
+    font-family: Microsoft JhengHei	;
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: azure;
+}
+
+
+.article-table{
+    width: 100%;
+    border: 1px;
+    border-collapse: collapse;
+
+}
+table tr{
+    border-top: grey;
+    border-bottom: grey;
+}
+table th {
+    letter-spacing: 2px;
+    text-align: left;
+}
+
+table td {
+    letter-spacing: 1px;
+}
+
