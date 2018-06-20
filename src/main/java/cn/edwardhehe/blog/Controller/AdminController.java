@@ -13,7 +13,6 @@ import cn.edwardhehe.blog.entity.User;
 import cn.edwardhehe.blog.service.ArticleServices;
 import cn.edwardhehe.blog.service.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,20 +20,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
-public class UserController {
+public class AdminController {
 
     @Autowired
     UserServices userServices;
     @Autowired
     ArticleServices articleServices;
 
+    //管理员界面
     @RequestMapping("")
     public String admin(Model model) {
         List<Article> articles = articleServices.list();
@@ -43,15 +44,38 @@ public class UserController {
         return "admin/index";
     }
 
-
-    @RequestMapping(value = "/dologin", method = RequestMethod.POST)
-    public String doLogin(HttpServletRequest request, User user, Model model) {
-        if (userServices.login(request.getParameter("username"), request.getParameter("password"))) {
-            System.out.println("登陆成功");
-        }
-        return "admin/index";
+    //登陆界面
+    @RequestMapping("/login")
+    public String login(Model model){
+        String message="请登陆";
+        model.addAttribute("message",message);//登陆状态信息
+        return "admin/login";
     }
 
+    //登陆动作
+    @RequestMapping(value = "/dologin", method = RequestMethod.POST)
+    public String doLogin(HttpServletRequest request, User user, Model model) {
+
+        if (userServices.login(request.getParameter("username"), request.getParameter("password"))) {
+            //登陆成功
+
+            HttpSession session=request.getSession(true);
+            session.setAttribute("user",user);
+            //设置超时时间
+            session.setMaxInactiveInterval(60*60*4);//超时时间4小时
+            //登陆成功则继续显示管理员页面
+            List<Article> articles = articleServices.list();
+            model.addAttribute("articles", articles);
+            return "admin/index";
+        }else{
+            String message="登陆失败";
+            model.addAttribute("message",message);//登陆状态信息
+            return "admin/login";
+        }
+
+    }
+
+    //删除文章按钮
     @RequestMapping(value = "/delete/{id}")
     public String doDelete(@PathVariable(name = "id") String id, Model model) {
         articleServices.delete(id);
@@ -59,6 +83,29 @@ public class UserController {
         model.addAttribute("articles", articles);
 
         return "admin/index";
+    }
+
+    /*
+写markDown文章界面
+ */
+    @RequestMapping("/write")
+    public String writeArticle(Model model){
+        model.addAttribute("article", new Article());
+        return "admin/write";
+    }
+
+    /**
+     * 存储文章
+     * @return
+     */
+    @RequestMapping(value = "/save",method = RequestMethod.POST)
+    public String upLoadArticle(@ModelAttribute(value = "article") Article article){
+        Date currentTime = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = formatter.format(currentTime);
+        article.setDate(dateString);
+        articleServices.save(article);
+        return "admin/write";
     }
 
 }

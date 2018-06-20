@@ -8,6 +8,7 @@
 
 package cn.edwardhehe.blog.interceptor;
 
+import cn.edwardhehe.blog.entity.User;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,22 +17,26 @@ import javax.servlet.http.HttpSession;
 
 public class LoginInterceptor implements HandlerInterceptor {
 
-    private final String SESSIONID = "sessionId";
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
                              Object handler) throws Exception {
 
-        HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession(false);
+        //如果看文章或者要登陆那就不拦截
 
-        if (session.getAttribute(SESSIONID) == null) {
+        if (session== null) {
             //没有session id 就重新定向到登陆界面
-            response.sendRedirect("/html/login.html");
-            return true;
+            response.sendRedirect("/admin/login");
+            return false;
         } else {
-            session.setAttribute(SESSIONID, request);
+            Object user=session.getAttribute("user");
+            if(user instanceof User){
+                return true;
+            }else{
+                response.sendRedirect("/admin/login");
+                return false;
+            }
         }
-
-        return false;
     }
 }

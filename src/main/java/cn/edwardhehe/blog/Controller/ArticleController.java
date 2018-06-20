@@ -7,10 +7,9 @@ import cn.edwardhehe.blog.service.CategoryServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,33 +42,5 @@ public class ArticleController {
 
         model.addAttribute("article", article);
         return "front/articleDetails";
-    }
-
-    /*
-    通过文章类型选取显示页面
-     */
-
-
-    /*
-    写markDown文章界面
-     */
-    @RequestMapping("/write")
-    public String writeArticle(Model model){
-        model.addAttribute("article", new Article());
-        return "front/write";
-    }
-
-    /**
-     * 存储文章
-     * @return
-     */
-    @RequestMapping(value = "/save",method = RequestMethod.POST)
-    public String upLoadArticle(@ModelAttribute(value = "article") Article article){
-        Date currentTime = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String dateString = formatter.format(currentTime);
-        article.setDate(dateString);
-        articleServices.save(article);
-        return "front/write";
     }
 }
