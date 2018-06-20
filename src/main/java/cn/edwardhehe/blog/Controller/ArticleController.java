@@ -13,6 +13,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Edwardhehe
+ */
 @Controller
 @RequestMapping("/article")
 public class ArticleController {
@@ -21,6 +24,7 @@ public class ArticleController {
     ArticleServices articleServices;
     @Autowired
     CategoryServices categoryServices;
+
     /*
     访问/articles返回front下面的index
      */

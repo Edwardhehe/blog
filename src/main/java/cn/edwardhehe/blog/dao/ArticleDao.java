@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Created by wangchenghao on 2017/7/31.
+ * Edwardhehe
  */
 @Repository
 public interface ArticleDao extends JpaRepository<Article, String>{
