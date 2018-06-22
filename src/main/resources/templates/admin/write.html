@@ -15,7 +15,11 @@
     </header>
 
     <form method="post" action="/admin/save" th:object="${article}">
-        <input type="radio" name="category" th:value="${c}">
+        <ul th:each="category:${categories}">
+            <input type="radio" name="category-selector"
+                   th:text="${category.getDisplayName()}"
+                   th:value="${category.getName()}"/>
+        </ul>
         <!--插入题目-->
         <div class="title">
             <label class="label" for="article-title">标题</label>

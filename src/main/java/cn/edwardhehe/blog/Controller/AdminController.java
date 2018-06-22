@@ -95,6 +95,8 @@ public class AdminController {
     @RequestMapping("/write")
     public String writeArticle(Model model){
         model.addAttribute("article", new Article());
+        List<Category> categories = categoryServices.list();
+        model.addAttribute("categories", categories);
         return "admin/write";
     }
 
@@ -103,16 +105,20 @@ public class AdminController {
      * @return
      */
     @RequestMapping(value = "/save",method = RequestMethod.POST)
-    public String upLoadArticle(@ModelAttribute(value = "article") Article article,Model model){
+    public String upLoadArticle(@ModelAttribute(value = "article") Article article,
+                                HttpServletRequest request) {
         //生成写文章试件
         Date currentTime = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateString = formatter.format(currentTime);
 
         //存储文章
-        List<Category> categories=categoryServices.list();
-        model.addAttribute("category",categories);
+        String categoryName = request.getParameter("category-selector");
+        Category category = categoryServices.fingdByName(categoryName);
         article.setDate(dateString);
+        article.setCategory(category);
+        //默认前50个字为Summery
+        article.setSummary(article.getContent().substring(0, 50));
         articleServices.save(article);
         return "admin/write";
     }

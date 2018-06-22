@@ -2,6 +2,7 @@ package cn.edwardhehe.blog.dao;
 
 import cn.edwardhehe.blog.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -11,4 +12,5 @@ import org.springframework.stereotype.Repository;
 public interface CategoryDao extends JpaRepository<Category, String>{
 
     Category findByName(String name);
+
 }
