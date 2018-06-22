@@ -9,8 +9,10 @@
 package cn.edwardhehe.blog.Controller;
 
 import cn.edwardhehe.blog.entity.Article;
+import cn.edwardhehe.blog.entity.Category;
 import cn.edwardhehe.blog.entity.User;
 import cn.edwardhehe.blog.service.ArticleServices;
+import cn.edwardhehe.blog.service.CategoryServices;
 import cn.edwardhehe.blog.service.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,6 +36,8 @@ public class AdminController {
     UserServices userServices;
     @Autowired
     ArticleServices articleServices;
+    @Autowired
+    CategoryServices categoryServices;
 
     //管理员界面
     @RequestMapping("")
@@ -47,7 +51,7 @@ public class AdminController {
     //登陆界面
     @RequestMapping("/login")
     public String login(Model model){
-        String message="请登陆";
+        String message="请输入账号密码";
         model.addAttribute("message",message);//登陆状态信息
         return "admin/login";
     }
@@ -99,10 +103,15 @@ public class AdminController {
      * @return
      */
     @RequestMapping(value = "/save",method = RequestMethod.POST)
-    public String upLoadArticle(@ModelAttribute(value = "article") Article article){
+    public String upLoadArticle(@ModelAttribute(value = "article") Article article,Model model){
+        //生成写文章试件
         Date currentTime = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateString = formatter.format(currentTime);
+
+        //存储文章
+        List<Category> categories=categoryServices.list();
+        model.addAttribute("category",categories);
         article.setDate(dateString);
         articleServices.save(article);
         return "admin/write";

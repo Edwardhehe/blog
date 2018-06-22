@@ -1,0 +1,23 @@
+html{
+    size:12px;
+    font-family: Microsoft JhengHei	;
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: azure;
+}
+
+
+.form-login-heading{
+    size: 3rem;
+    text-shadow:  2px 2px 5px;
+    text-align: center;
+}
+
+.login-status{
+    text-align: center;
+    font-family: "Microsoft YaHei", "微软雅黑", Helvetica, Tahoma, STXihei, "华文细黑", STHeiti, "Helvetica Neue", Helvetica, Tahoma, "Droid Sans", "wenquanyi micro hei", FreeSans, Arimo, Arial, SimSun, "宋体", Heiti, "黑体", sans-serif;
+}
+
+.login-table{
+    align-self: center;
+}
