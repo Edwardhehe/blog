@@ -1,12 +1,6 @@
-/*
- * Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
- * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
- * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
- * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
- * Vestibulum commodo. Ut rhoncus gravida arcu.
- */
 
-package cn.edwardhehe.blog.Controller;
+
+package cn.edwardhehe.blog.controller;
 
 import cn.edwardhehe.blog.entity.Article;
 import cn.edwardhehe.blog.entity.Category;
@@ -28,8 +22,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author lihao
+ */
 @Controller
 @RequestMapping("/admin")
+
 public class AdminController {
 
     @Autowired
@@ -40,6 +38,13 @@ public class AdminController {
     CategoryServices categoryServices;
 
     //管理员界面
+
+    /**
+     * 映射到文章浏览主页，显示文章内容
+     *
+     * @param model
+     * @return
+     */
     @RequestMapping("")
     public String admin(Model model) {
         List<Article> articles = articleServices.list();
@@ -48,14 +53,26 @@ public class AdminController {
         return "admin/index";
     }
 
+    /**
+     * 映射登陆界面
+     * @param model
+     * @return
+     */
     //登陆界面
     @RequestMapping("/login")
-    public String login(Model model){
-        String message="请输入账号密码";
-        model.addAttribute("message",message);//登陆状态信息
+    public String login(Model model) {
+        String message = "请输入账号密码";
+        //登陆状态信息
+        model.addAttribute("message", message);
         return "admin/login";
     }
 
+    /**
+     * @param request
+     * @param user
+     * @param model
+     * @return
+     */
     //登陆动作
     @RequestMapping(value = "/dologin", method = RequestMethod.POST)
     public String doLogin(HttpServletRequest request, User user, Model model) {
@@ -63,23 +80,29 @@ public class AdminController {
         if (userServices.login(request.getParameter("username"), request.getParameter("password"))) {
             //登陆成功
 
-            HttpSession session=request.getSession(true);
-            session.setAttribute("user",user);
+            HttpSession session = request.getSession(true);
+            session.setAttribute("user", user);
             //设置超时时间
-            session.setMaxInactiveInterval(60*60*4);//超时时间4小时
+            session.setMaxInactiveInterval(60 * 60 * 4);
             //登陆成功则继续显示管理员页面
             List<Article> articles = articleServices.list();
             model.addAttribute("articles", articles);
             return "admin/index";
-        }else{
-            String message="登陆失败";
-            model.addAttribute("message",message);//登陆状态信息
+        } else {
+            String message = "登陆失败";
+            //状态信息
+            model.addAttribute("message", message);
             return "admin/login";
         }
 
     }
 
-    //删除文章按钮
+    /**
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/delete/{id}")
     public String doDelete(@PathVariable(name = "id") String id, Model model) {
         articleServices.delete(id);
@@ -89,11 +112,14 @@ public class AdminController {
         return "admin/index";
     }
 
-    /*
-写markDown文章界面
- */
+
+    /**
+     *
+     * @param model
+     * @return
+     */
     @RequestMapping("/write")
-    public String writeArticle(Model model){
+    public String writeArticle(Model model) {
         model.addAttribute("article", new Article());
         List<Category> categories = categoryServices.list();
         model.addAttribute("categories", categories);
@@ -102,9 +128,10 @@ public class AdminController {
 
     /**
      * 存储文章
+     *
      * @return
      */
-    @RequestMapping(value = "/save",method = RequestMethod.POST)
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String upLoadArticle(@ModelAttribute(value = "article") Article article,
                                 HttpServletRequest request) {
         //生成写文章试件
@@ -120,7 +147,7 @@ public class AdminController {
         //默认前50个字为Summery
         article.setSummary(article.getContent().substring(0, 50));
         articleServices.save(article);
-        return "admin/write";
+        return "admin/index";
     }
 
 }

@@ -12,11 +12,22 @@ import java.util.List;
  * Edwardhehe
  */
 @Repository
-public interface ArticleDao extends JpaRepository<Article, String>{
+public interface ArticleDao extends JpaRepository<Article, String> {
 
+    /**
+     * 搜索论文题目
+     *
+     * @param title
+     * @return
+     */
     @Query("from Article where title like %:title%")
     List<Article> findByTitleLike(@Param("title") String title);
 
+    /**
+     * 根据文章类型寻找文章
+     * @param categoryId
+     * @return
+     */
     @Query("from Article where category = category")
-    List<Article> findByCategory(@Param("categoryId")String categoryId);
+    List<Article> findByCategory(@Param("categoryId") String categoryId);
 }

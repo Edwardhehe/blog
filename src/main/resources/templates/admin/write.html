@@ -20,10 +20,15 @@
                    th:text="${category.getDisplayName()}"
                    th:value="${category.getName()}"/>
         </ul>
+
+        <div id="summery">
+            <label class="label" for="summery-content">文章主题</label>
+            <input id="summery-content" type="text" th:field="*{summary}"/>
+        </div>
         <!--插入题目-->
         <div class="title">
             <label class="label" for="article-title">标题</label>
-            <input id="article-title" class="article-title" type="text" th:field="*{title}" />
+            <input id="article-title" type="text" th:field="*{title}"/>
         </div>
 
         <hr/>

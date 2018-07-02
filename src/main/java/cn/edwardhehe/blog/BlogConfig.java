@@ -6,6 +6,9 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistration
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * @author lihao
+ */
 @Configuration
 public class BlogConfig implements WebMvcConfigurer {
     @Override

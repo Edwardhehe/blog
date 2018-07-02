@@ -7,21 +7,24 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author lihao
+ */
 @Service
 public class CategoryServices {
     @Autowired
     private CategoryDao categoryDao;
 
-    public List<Category> list(){
+    public List<Category> list() {
         return categoryDao.findAll();
     }
 
-    public Category get(String id){
+    public Category get(String id) {
         return categoryDao.getOne(id);
     }
 
 
-    public Category fingdByName(String name){
+    public Category fingdByName(String name) {
         return categoryDao.findByName(name);
     }
 }

@@ -5,17 +5,20 @@ import cn.edwardhehe.blog.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author lihao
+ */
 @Service
 public class UserServices {
 
     @Autowired
     UserDao userDao;
 
-    public boolean login(String username, String password){
+    public boolean login(String username, String password) {
         User user = userDao.findByUsernameAndPassword(username, password);
-        if(null == user){
+        if (null == user) {
             return false;
-        }else {
+        } else {
 
             return true;
         }
