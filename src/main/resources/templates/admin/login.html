@@ -17,10 +17,10 @@
                 <td>
                     <label for="inputEmail" class="label-login">用户名</label>
                 </td>
-               <td>
-                   <input type="text" id="inputEmail" name="username" class="form-control"
-                          placeholder="用户名" required autofocus>
-               </td>
+                <td>
+                    <input type="text" id="inputEmail" name="username" class="form-control"
+                           placeholder="用户名" required autofocus>
+                </td>
 
             </tr>
             <tr>
@@ -28,7 +28,8 @@
                     <label for="inputPassword" class="label-login">密码</label>
                 </td>
                 <td>
-                    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="密码" required>
+                    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="密码"
+                           required>
                 </td>
 
             </tr>
@@ -37,12 +38,12 @@
                     <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
                 </td>
             </tr>
-           </table>
+        </table>
     </form>
 </div>
 
-    <div>
-        <p class="login-status" th:text="${message}"></p>
-    </div>
+<div>
+    <p class="login-status" th:text="${message}"></p>
+</div>
 </body>
 </html>

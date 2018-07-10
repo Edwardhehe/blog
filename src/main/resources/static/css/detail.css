@@ -1,24 +1,25 @@
-html{
-    size:12px;
-    font-family: Microsoft JhengHei	;
+html {
+    size: 12px;
+    font-family: Microsoft JhengHei;
     max-width: 1000px;
     margin: 0 auto;
     background-color: azure;
 }
 
-header h1{
+header h1 {
     size: 20px;
 }
 
-.article-category{
+.article-category {
     size: 1rem;
     text-align: center;
     border: bisque;
     background-color: bisque;
-    width:fit-content;
-    width:-moz-fit-content;
+    width: fit-content;
+    width: -moz-fit-content;
 }
-article{
+
+article {
     width: 100%;
     float: left;
 }

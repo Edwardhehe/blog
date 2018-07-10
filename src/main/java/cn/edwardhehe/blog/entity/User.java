@@ -5,7 +5,6 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 /**
- *
  * @author wangchenghao
  * @date 2017/7/31
  */
